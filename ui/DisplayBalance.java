@@ -2,10 +2,7 @@ package ui;
 
 import data.CalcBankBalance;
 
-import java.util.Locale;
 import java.util.Scanner;
-
-import static javafx.application.Platform.exit;
 
 public class DisplayBalance {
     static Scanner sc = new Scanner(System.in);
@@ -13,18 +10,25 @@ public class DisplayBalance {
 
     public static void currentAmount() {
         System.out.println("What would you like to do Withdraw (press w), Deposit (press d), or Exit (press e)?");
-        String userInput = sc.nextLine();
+        String userInput = sc.next();
 
-        if (userInput.equalsIgnoreCase("w")){
-            withdrawFromAccount();
-        } else if (userInput.equalsIgnoreCase("d")){
-            depositToAccount();
-        } else if (userInput.equalsIgnoreCase("e")){
-            System.out.println("Thanks for banking with us!");
-        } else {
-            System.out.println("Please enter a valid command.");
-        }
         //System.out.println("You pressed " + sc.nextLine());
+        /* if user input matches the required commands call the appropriate method
+         * otherwise close program
+         * or prompt for valid command
+         * */
+        //code is currently continuing to run without user prompts
+        switch (userInput.toLowerCase()) {
+            case "w":
+                withdrawFromAccount();
+            case "d":
+                depositToAccount();
+            case "e": {
+                System.out.println("Thanks for banking with us!");
+                System.exit(0);
+            }
+            default: System.out.println("Please enter a valid command.");
+        }
     }
 
     private static void withdrawFromAccount() {
@@ -40,6 +44,7 @@ public class DisplayBalance {
             WithdrawalBalance.withdrawWithMessage(withdrawalAmount);
         }
         System.out.println("Your current balance is $" + currentBalance.getCurrentAmount());
+
         currentAmount();
     }
 
@@ -48,6 +53,7 @@ public class DisplayBalance {
         int depositAmount = sc.nextInt();
         int deposit = currentBalance.deposit(depositAmount);
         System.out.println("Your current balance is $" + deposit);
+
         currentAmount();
     }
 
