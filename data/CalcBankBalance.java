@@ -14,16 +14,18 @@ public class CalcBankBalance {
         return bankAccountBalance;
     }
 
-    public void deposit(int amountToDeposit) {
-        bankAccountBalance += amountToDeposit;
+    public int deposit(int amountToDeposit) {
+       return bankAccountBalance += amountToDeposit;
     }
 
-    public void withdraw(int amountToWithDraw) {
+    //method takes user input and determines if there is enough in account to withdraw
+    public int withdraw(int amountToWithDraw) {
         if (bankAccountBalance < amountToWithDraw) {
             System.out.println("Insufficient Funds. :( Please adjust the amount withdrawn.");
         } else {
-            bankAccountBalance -= amountToWithDraw;
+            return bankAccountBalance -= amountToWithDraw;
         }
+        return bankAccountBalance;
     }
 
     //withdraws against five dollar bills
